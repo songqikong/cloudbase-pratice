@@ -40,30 +40,25 @@ export const checkEnvironment = () => {
 };
 
 /**
- * 执行匿名登录
+ * 执行登录
  * @returns {Promise} 登录状态
  */
 const login = async () => {
   const auth = app.auth();
   
   try {
+    // 默认采用匿名登录,
     await auth.signInAnonymously();
-    const loginScope = await auth.loginScope();
-    
-    if (loginScope === 'anonymous') {
-      console.log('匿名登录成功');
-      return await auth.getLoginState();
-    } else {
-      throw new Error('登录失败：未获得匿名登录权限');
-    }
+    // 也可以换成跳转SDK 内置的登录页面，支持账号密码登录/手机号登录/微信登录
+    // await auth.toDefaultLoginPage()
   } catch (error) {
-    console.error('匿名登录失败:', error);
+    console.error('登录失败:', error);
     throw error;
   }
 };
 
 /**
- * 确保用户已登录（如未登录会执行匿名登录）
+ * 确保用户已登录
  * @returns {Promise} 登录状态
  */
 export const ensureLogin = async () => {
@@ -84,23 +79,12 @@ export const ensureLogin = async () => {
       return loginState;
     } else {
       // 未登录，执行匿名登录
-      console.log('用户未登录，执行匿名登录...');
+      console.log('用户未登录，执行登录...');
       loginState = await login();
       return loginState;
     }
   } catch (error) {
-    console.error('确保登录失败:', error);
-    
-    // 即使登录失败，也返回一个降级的登录状态，确保应用可以继续运行
-    console.warn('使用降级登录状态，应用将以离线模式运行');
-    return {
-      isLoggedIn: true,
-      user: {
-        uid: 'offline_' + Date.now(),
-        isAnonymous: true,
-        isOffline: true
-      }
-    };
+    console.error('登录失败:', error);
   }
 };
 
@@ -112,13 +96,6 @@ export const logout = async () => {
   const auth = app.auth();
   
   try {
-    const loginScope = await auth.loginScope();
-    
-    if (loginScope === 'anonymous') {
-      console.warn('匿名登录状态无法退出');
-      return { success: false, message: '匿名登录状态无法退出' };
-    }
-    
     await auth.signOut();
     return { success: true, message: '已成功退出登录' };
   } catch (error) {

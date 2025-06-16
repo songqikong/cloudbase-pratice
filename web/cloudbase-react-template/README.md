@@ -52,6 +52,7 @@ npm install
 
 1. 打开 `src/utils/cloudbase.js` 文件
 2. 将 `ENV_ID` 变量的值修改为您的云开发环境 ID
+3. 将 `vite.config.js` 中的`https://envId-appid.tcloudbaseapp.com/` 替换为你的云开发环境静态托管默认域名，可以使用 MCP 来查询云开发环境静态托管默认域名
 
 ### 本地开发
 
@@ -213,54 +214,7 @@ const ComponentWithNavigation = () => {
 
 ### 初始化云开发
 
-本模板在 `src/utils/cloudbase.js` 中集中管理云开发的初始化和匿名登录功能。这个工具文件提供了以下功能：
-
-```javascript
-import cloudbase from './utils/cloudbase';
-
-// 方式一：使用默认实例
-const app = cloudbase.app;  // 获取默认初始化的实例
-
-// 方式二：自定义配置初始化
-const customApp = cloudbase.init({
-  env: '您的环境ID',  // 替换为实际的环境ID
-  timeout: 10000     // 可选，设置超时时间
-});
-
-// 确保用户已登录（如未登录会执行匿名登录）
-cloudbase.ensureLogin().then(loginState => {
-  console.log('登录成功:', loginState);
-  
-  // 获取登录范围（确认是否为匿名登录）
-  app.auth().loginScope().then(scope => {
-    console.log('登录范围:', scope);  // 'anonymous' 表示匿名登录
-  });
-  
-  // 使用其他云开发功能
-  const db = app.database();
-  const collection = db.collection('todos');
-  
-  // 调用云函数
-  app.callFunction({
-    name: 'functionName',
-    data: { /* 参数 */ }
-  });
-  
-  // 上传文件
-  app.uploadFile({
-    cloudPath: 'images/example.jpg',
-    filePath: /* 文件对象 */,
-    onUploadProgress: progress => console.log('上传进度:', progress)
-  });
-});
-
-// 退出登录（注意：匿名登录无法退出）
-cloudbase.logout().then(() => {
-  console.log('已退出登录');
-}).catch(error => {
-  console.error('退出登录失败:', error);
-});
-```
+本模板在 `src/utils/cloudbase.js` 中集中管理云开发的初始化和匿名登录功能。这个工具文件提供了云开发示例的获取/登录，调用云函数，云存储，云数据库等能力
 
 ### 重要说明
 
@@ -269,82 +223,6 @@ cloudbase.logout().then(() => {
 3. 所有云开发功能都通过初始化的应用实例直接调用，无需二次封装。
 4. `ensureLogin` 方法会检查当前登录状态，如果已登录则返回当前登录状态，否则会进行匿名登录。
 5. 匿名登录状态无法使用 `logout` 方法退出，只有其他登录方式（如微信登录、邮箱登录等）可以退出。
-
-### 身份认证
-
-确保用户已登录（如未登录则执行匿名登录）：
-
-```javascript
-cloudbase.ensureLogin().then(loginState => {
-  console.log('用户ID:', loginState.user.uid);
-});
-```
-
-退出登录（非匿名登录状态下）：
-
-```javascript
-cloudbase.logout().then(() => {
-  console.log('已成功退出登录');
-});
-```
-
-### 云数据库访问
-
-```javascript
-const db = cloudbase.app.database();
-const collection = db.collection('todos');
-
-// 查询数据
-collection.get().then(res => {
-  console.log('查询结果:', res.data);
-});
-
-// 添加数据
-collection.add({
-  title: '新任务',
-  completed: false,
-  createTime: new Date()
-}).then(res => {
-  console.log('添加成功:', res);
-});
-```
-
-### 云函数调用
-
-```javascript
-cloudbase.app.callFunction({
-  name: 'functionName',
-  data: {
-    // 函数参数
-    param1: 'value1',
-    param2: 'value2'
-  }
-}).then(res => {
-  console.log('函数执行结果:', res.result);
-});
-```
-
-### 云存储
-
-```javascript
-// 上传文件
-cloudbase.app.uploadFile({
-  cloudPath: 'images/avatar.jpg', // 云端存储路径
-  filePath: fileObject, // 本地文件对象
-  onUploadProgress: progressEvent => {
-    console.log('上传进度:', progressEvent);
-  }
-}).then(result => {
-  console.log('文件ID:', result.fileID);
-});
-
-// 获取文件下载链接
-cloudbase.app.getTempFileURL({
-  fileList: ['cloud://环境ID.图片路径']
-}).then(res => {
-  console.log('文件临时链接:', res.fileList[0].tempFileURL);
-});
-```
 
 ## 贡献指南
 

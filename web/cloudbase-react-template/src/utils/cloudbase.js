@@ -18,7 +18,7 @@ export const init = (config = {}) => {
     env: config.env || ENV_ID,
     timeout: config.timeout || 15000,
   };
-  
+
   return cloudbase.init(appConfig);
 };
 
@@ -50,24 +50,30 @@ export const ensureLogin = async () => {
   }
 
   const auth = app.auth();
-  
+
   try {
     // 检查当前登录状态
     let loginState = await auth.getLoginState();
-    
+
     if (loginState && loginState.isLoggedIn) {
       // 已登录，返回当前状态
       console.log('用户已登录');
       return loginState;
     } else {
-      // 未登录，执行匿名登录
-      console.log('用户未登录，执行匿名登录...');
-      loginState = await auth.signInAnonymously();
+      // 未登录，执行登录
+      console.log('用户未登录，执行登录...');
+
+      // 默认采用匿名登录,
+      await auth.signInAnonymously();
+      // 也可以换成跳转SDK 内置的登录页面，支持账号密码登录/手机号登录/微信登录
+      // await auth.toDefaultLoginPage()
+
+      let loginState = await auth.getLoginState()
       return loginState;
     }
   } catch (error) {
     console.error('确保登录失败:', error);
-    
+
     // 即使登录失败，也返回一个降级的登录状态，确保应用可以继续运行
     console.warn('使用降级登录状态，应用将以离线模式运行');
     return {
@@ -89,15 +95,15 @@ export const ensureLogin = async () => {
  */
 export const logout = async () => {
   const auth = app.auth();
-  
+
   try {
     const loginScope = await auth.loginScope();
-    
+
     if (loginScope === 'anonymous') {
       console.warn('匿名登录状态无法退出');
       return { success: false, message: '匿名登录状态无法退出' };
     }
-    
+
     await auth.signOut();
     return { success: true, message: '已成功退出登录' };
   } catch (error) {

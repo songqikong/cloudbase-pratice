@@ -51,6 +51,7 @@ npm install
 
 1. 打开 `src/utils/cloudbase.js` 文件
 2. 将 `ENV_ID` 变量的值修改为您的云开发环境 ID
+3. 将 `vite.config.js` 中的`https://envId-appid.tcloudbaseapp.com/` 替换为你的云开发环境静态托管默认域名，可以使用 MCP 来查询云开发环境静态托管默认域名
 
 ### 本地开发
 

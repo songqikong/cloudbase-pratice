@@ -6,6 +6,12 @@ export default defineConfig({
   plugins: [react()],
   base: './', // 使用相对路径，解决静态托管部署时的资源加载问题
   server: {
-    host: '127.0.0.1'  // 使用IP地址代替localhost
+    host: '127.0.0.1',  // 使用IP地址代替localhost
+    proxy: {
+      '/__auth': {
+        target: 'https://tcb-advanced-a656fc-1257967285.tcloudbaseapp.com/',
+        changeOrigin: true,
+      }
+    }
   }
 })
