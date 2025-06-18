@@ -176,45 +176,22 @@ const userDisplayName = computed(() =>
 
 ## 云开发使用示例
 
-### 匿名登录
+通过 `src/utils/cloudbase.js` 访问云开发服务：
 
 ```javascript
-import { ensureLogin } from './utils/cloudbase.js'
+import { app, ensureLogin } from './utils/cloudbase.js'
 
-const loginState = await ensureLogin()
-console.log('登录状态:', loginState)
-```
+// 数据库操作
+await ensureLogin();
+const db = app.database();
+const result = await db.collection('users').get(); // 查询数据
+await db.collection('users').add({ name: 'test' }); // 添加数据
 
-### 数据库操作
+// 调用云函数
+const funcResult = await app.callFunction({ name: 'hello' });
 
-```javascript
-import { app } from './utils/cloudbase.js'
-
-const db = app.database()
-const collection = db.collection('todos')
-
-// 添加数据
-await collection.add({
-  title: '学习 Vue 3',
-  completed: false,
-  createTime: new Date()
-})
-
-// 查询数据
-const result = await collection.get()
-console.log('查询结果:', result.data)
-```
-
-### 云函数调用
-
-```javascript
-import { app } from './utils/cloudbase.js'
-
-const result = await app.callFunction({
-  name: 'hello',
-  data: { name: 'Vue' }
-})
-console.log('云函数结果:', result.result)
+// 文件上传
+const uploadResult = await app.uploadFile({ cloudPath: 'test.jpg', filePath: file });
 ```
 
 ## 开发指南

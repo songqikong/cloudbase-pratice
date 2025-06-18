@@ -214,7 +214,27 @@ const ComponentWithNavigation = () => {
 
 ### 初始化云开发
 
-本模板在 `src/utils/cloudbase.js` 中集中管理云开发的初始化和匿名登录功能。这个工具文件提供了云开发示例的获取/登录，调用云函数，云存储，云数据库等能力
+本模板在 `src/utils/cloudbase.js` 中集中管理云开发的初始化和匿名登录功能。这个工具文件提供了云开发示例的获取/登录，调用云函数，云存储，云数据库等能力。
+
+### 使用云数据库、云函数、云存储
+
+通过 `src/utils/cloudbase.js` 访问云开发服务：
+
+```jsx
+import { app, ensureLogin } from '../utils/cloudbase';
+
+// 数据库操作
+await ensureLogin();
+const db = app.database();
+const result = await db.collection('users').get(); // 查询数据
+await db.collection('users').add({ name: 'test' }); // 添加数据
+// 调用云函数
+const funcResult = await app.callFunction({ name: 'getEnvInfo' });
+// 文件上传
+const uploadResult = await app.uploadFile({ cloudPath: 'test.jpg', filePath: file });
+// 数据模型
+const models = app.models;
+```
 
 ### 重要说明
 
@@ -223,6 +243,7 @@ const ComponentWithNavigation = () => {
 3. 所有云开发功能都通过初始化的应用实例直接调用，无需二次封装。
 4. `ensureLogin` 方法会检查当前登录状态，如果已登录则返回当前登录状态，否则会进行匿名登录。
 5. 匿名登录状态无法使用 `logout` 方法退出，只有其他登录方式（如微信登录、邮箱登录等）可以退出。
+6. 在使用数据库、云函数、云存储等功能前，请确保在云开发控制台中已创建相应的资源。
 
 ## 贡献指南
 

@@ -78,5 +78,24 @@ wx.cloud.init({
 └── project.private.config.json
 ```
 
+## 云开发使用示例
+
+通过 `wx.cloud` 访问云开发服务：
+
+```javascript
+// 数据库操作
+const db = wx.cloud.database();
+const result = await db.collection('users').get(); // 查询数据
+await db.collection('users').add({ data: { name: 'test' } }); // 添加数据
+
+// 调用云函数
+const funcResult = await wx.cloud.callFunction({ name: 'getOpenId' });
+
+// 文件上传
+const uploadResult = await wx.cloud.uploadFile({ cloudPath: 'test.jpg', filePath: tempFilePath });
+// 调用数据模型
+const models = wx.cloud.models;
+```
+
 ## 扩展开发
 您可以根据项目需求，添加新的云函数和页面，实现更多的云开发功能。
