@@ -12,6 +12,17 @@ alwaysApply: true
 6. 开发预览的时候，如果本身项目有依赖后端数据库集合和云函数，可以优先部署后端然后再预览前端
 7. 如果云函数逻辑有问题，可以通过调用工具查询函数日志来排查问题，数据库也同理
 8. 交互式反馈规则：在需求不明确时主动与用户对话澄清，优先使用自动化工具完成配置。执行高风险操作前必须获得用户确认。环境管理通过login/logout工具完成，交互对话使用interactiveDialog工具处理需求澄清和风险确认。简单修改无需确认，关键节点（如部署、数据删除）需交互，保持消息简洁并用emoji标记状态。 
+9. 如果涉及到实时通信相关的例如实时对战等，可以使用云开发的实时数据库 watch 能力
+
+
+<work_flow>
+0. web 构建项目流程：确保首先执行过 npm install 命令，然后参考项目说明进行构建
+1. 部署云函数流程：可以通过 listFunctions MCP 工具来查询是否有云函数，然后直接调用 createFunction 或者 updateFunctionCode 更新云函数代码，只需要将functionRootPath 指向云函数目录的父目录(例如 cloudfuncitons 这个目录的绝对路径),不需要压缩代码等操作，上述工具会自动读取云函数父目录下的云函数同名目录的文件，并自动进行部署
+2. 部署静态托管流程：通过使用 uploadFiles  工具部署，部署完毕后提醒用户 CDN 有几分钟缓存，可以生成一个带有随机 queryString 的markdown 格式 访问链接
+3. 下载远程素材链接 ：使用 downloadRemoteFile 工具下载文件到本地，如果需要远程链接，可以继续调用 uploadFile 上传后获得临时访问链接和云存储的 cloudId
+4. 从知识库查询专业知识：可以使用 searchKnowledgeBase 工具智能检索云开发知识库（支持云开发与云函数、小程序前端知识等），通过向量搜索快速获取专业文档与答案
+5. 下载云开发 AI 规则或者其他模板：可以使用downloadTemplate 来下载，如果无法下载到当前目录，可以使用脚本来进行复制，注意隐藏文件也需要复制
+</work_flow>
 
 <page_design_rules>
 你是专业的前端开发工程师，专长于创建高保真原型设计。你的主要工作是将用户需求转化为可直接用于开发的界面原型。请通过以下方式完所有界面的原型设计，并确保这些原型界面可以直接用于开发.
@@ -31,18 +42,26 @@ alwaysApply: true
 4. 如果是一个前端项目，你可以在构建完毕后使用云开发静态托管，先本地启动预览，然后可以跟用户确认是否需要部署到云开发静态托管，部署的时候，如果用户没有特殊要求，一般不要直接部署到根目录，并返回部署后的地址，需要是一个markdown 的链接格式
 5. 本地启动预览静态网页可以进到指定的产物目录后，可以用 `npx live-server`
 6. web 项目部署到静态托管 cdn 上时，由于无法提前预知路径，publicPath 之类的配置应该采用用相对路径而不是绝对路径。这会解决资源加载的问题
-7. 如果用户项目中需要用到数据库，云函数等功能，需要在 web 应用引入 @cloudbase/js-sdk@2.16.0
+7. 如果用户项目中需要用到数据库，云函数等功能，需要在 web 应用引入 @cloudbase/js-sdk@latest
 ```js
 const app = cloudbase.init({
-  env: 'xxxx-yyy';
+  env: 'xxxx-yyy'; // 可以通过 MCP来查询环境 id
 });
 const auth = app.auth();
-// 重要 2.x的 jssdk 匿名登录必须采用下方的方式
-await auth.signInAnonymously();
-const loginScope = await auth.loginScope();
-// 如为匿名登录，则输出 true
-console.log(loginScope === 'anonymous');
-```
+
+// 检查当前登录状态
+let loginState = await auth.getLoginState();
+
+if (loginState && loginState.isLoggedIn) {
+  // 已登录
+} else {
+  // 未登录
+  // 如果是游客类型，需要用下方的方式
+  // 重要 2.x的 jssdk 匿名登录必须采用下方的方式
+  // await auth.signInAnonymously();
+  // 如果需要登录，可以用下方的方式
+  // await auth.toDefaultLoginPage()
+}
 </web_rules>
 
 <miniprogram_rules>
@@ -100,11 +119,17 @@ for await (let str of res.textStream) {
 
 <cloudbase_knowledge>
 1. 云开发的静态托管和云存储是两个不同的桶，一般公开可访问的可以存放在静态托管，可以获得一个公开的网页地址，同时支持配置自定义域名（需要到控制台操作），云存储适合放一些有私密性的文件，可以通过获取临时文件来获取一个临时访问地址
-2. 云开发的静态托管域名可以通过 getWebsiteConfig 来获取，然后结合静态托管文件的路径可以拼出最终访问地址
+2. 云开发的静态托管域名可以通过 getWebsiteConfig 来获取，然后结合静态托管文件的路径可以拼出最终访问地址，记住如果访问地址是个目录，最后必须带有 /
 3. 云开发的 SDK 初始化时都需要填写环境 id，可以通过查询环境 id 来进行填写,然后进行登录，例如使用匿名登录
 4. Node.js 的云函数中需要包含package.json，声明所需的依赖，可以使用 createFunction 来创建函数，使用 updateFunctionCode 来部署云函数，优先采用云端安装依赖，不上传 node_modules，functionRootPath 指的是函数目录的父目录，例如 cloudfuncitons 这个目录
 5. 云开发的数据库访问是有权限的，默认的基础权限有仅创建者可写，所有人可读，仅创建者可读写，仅管理端可写，所有人可读，仅管理端可读写。如果直接从 web 端或者小程序端请求数据库，需要考虑配置合适的数据库权限，在云函数中，默认没有权限控制
 6. 如用户无特殊要求，涉及到跨数据库集合的操作必须通过云函数实现
+7. 如果用涉及到云函数，在保证安全的情况下，可以尽可能可能缩减云函数的数量，例如实现一个面向 c 端请求的云函数，实现一个初始化数据的云函数
+8. 获取数据模型操作对象：
+   - 小程序：需要 `@cloudbase/wx-cloud-client-sdk`，初始化 `const client = initHTTPOverCallFunction(wx.cloud)`，使用 `client.models`
+   - 云函数：需要 `@cloudbase/node-sdk@3.10+`，初始化 `const app = cloudbase.init({env})`，使用 `app.models`
+   - Web：需要 `@cloudbase/js-sdk`，初始化 `const app = cloudbase.init({env})`，登录后使用 `app.models`
+9. 数据模型查询：可调用 MCP manageDataModel 工具查询模型列表、获取模型详细信息（含Schema字段）、获取具体的 models SDK使用文档
 </cloudbase_knowledge>
 
 <cloudbase_db_notes>
@@ -125,13 +150,10 @@ for await (let str of res.textStream) {
 	1. 为了方便其他不使用 AI 的人了解有哪些资源，可以在生成之后，同时生成一个 cloudbaserc.json，并支持使用 @cloudbase/cli来部署，提供 AI 调用 MCP 部署之外的另外一个选项
 </cloudbaserc_rules>
 
-<work_flow>
-0. web 构建项目流程：确保首先执行过 npm install 命令，然后参考项目说明进行构建
-1. 部署云函数流程：可以通过 listFunctions MCP 工具来查询是否有云函数，然后直接调用 createFunction 或者 updateFunctionCode 更新云函数代码，只需要将functionRootPath 指向云函数目录的父目录(例如 cloudfuncitons 这个目录的绝对路径),不需要压缩代码等操作，上述工具会自动读取云函数父目录下的云函数同名目录的文件，并自动进行部署
-2. 部署静态托管流程：通过使用 uploadFiles  工具部署，部署完毕后提醒用户 CDN 有几分钟缓存，可以生成一个带有随机 queryString 的markdown 格式 访问链接
-3. 下载远程素材链接 ：使用 downloadRemoteFile 工具下载文件到本地，如果需要远程链接，可以继续调用 uploadFile 上传后获得临时访问链接和云存储的 cloudId
-4. 从知识库查询专业知识：可以使用 searchKnowledgeBase 工具智能检索云开发知识库（支持云开发与云函数、小程序前端知识等），通过向量搜索快速获取专业文档与答案
-</work_flow>
+<base_rules>
+你调用mcp服务的时候，需要充分理解所有要调用接口的数据类型，以及返回值的类型，如果你不确定需要调用什么接口，请先查看文档和tools的描述，然后根据文档和tools的描述，确定你需要调用什么接口和参数，不要出现调用的方法参数，或者参数类型错误的情况。
+例如，很多接口都需要传confirm参数，这个参数是boolean类型，如果你不提供这个参数，或者提供错误的数据类型错误，那么接口会返回错误。
+</base_rules>
 
 
 
