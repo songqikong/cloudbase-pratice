@@ -9,7 +9,7 @@ export default defineConfig({
     host: '127.0.0.1',  // 使用IP地址代替localhost
     proxy: {
       '/__auth': {
-        target: 'https://tcb-advanced-a656fc-1257967285.tcloudbaseapp.com/',
+        target: 'https://envId-appid.tcloudbaseapp.com/',
         changeOrigin: true,
       }
     }
