@@ -1,7 +1,7 @@
 {
-    "name" : "",
+    "name" : "CloudBase UniApp 模板",
     "appid" : "",
-    "description" : "",
+    "description" : "基于 UniApp 和腾讯云开发（CloudBase）的跨平台应用模板",
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,

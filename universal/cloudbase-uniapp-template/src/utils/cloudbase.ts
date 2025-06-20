@@ -1,34 +1,103 @@
 import cloudbase from '@cloudbase/js-sdk';
-import adapter from './adapter.js';
+// import adapter from './adapter.js';
 
 // 使用 UniApp 适配器
-cloudbase.useAdapters(adapter);
+// cloudbase.useAdapters(adapter);
 
-// 云开发环境配置
-const config = {
-  env: 'your-env-id', // 请替换为您的云开发环境ID
-  // 如果需要使用移动应用安全凭证，请取消注释并填写
-  // appSign: 'your-app-sign',
-  // appSecret: {
-  //   appAccessKeyId: 1,
-  //   appAccessKey: 'your-app-secret'
-  // }
+// 云开发环境ID，使用时请替换为您的环境ID
+const ENV_ID: string = 'your-env-id';
+
+// 检查环境ID是否已配置
+export const isValidEnvId = ENV_ID && ENV_ID !== 'your-env-id';
+
+/**
+ * 初始化云开发实例
+ * @param {Object} config - 初始化配置
+ * @param {string} config.env - 环境ID，默认使用ENV_ID
+ * @param {number} config.timeout - 超时时间，默认15000ms
+ * @returns {Object} 云开发实例
+ */
+export const init = (config: any = {}) => {
+  const appConfig = {
+    env: config.env || ENV_ID,
+    timeout: config.timeout || 15000,
+    // 移动应用安全凭证配置（App 端适配开发中，暂时不需要）
+    // appSign: 'your-app-sign',
+    // appSecret: {
+    //   appAccessKeyId: 1,
+    //   appAccessKey: 'your-app-secret'
+    // }
+  };
+
+  return cloudbase.init(appConfig);
 };
 
-// 创建云开发应用实例
-const app = cloudbase.init(config);
+/**
+ * 默认的云开发实例
+ */
+export const app = init();
 
-// 获取认证对象
-const auth = app.auth();
+/**
+ * 检查环境配置是否有效
+ */
+export const checkEnvironment = () => {
+  if (!isValidEnvId) {
+    const message = '❌ 云开发环境ID未配置\n\n请按以下步骤配置：\n1. 打开 src/utils/cloudbase.ts 文件\n2. 将 ENV_ID 变量的值替换为您的云开发环境ID\n3. 保存文件并重新运行\n\n获取环境ID：https://console.cloud.tencent.com/tcb';
+    console.error(message);
+    return false;
+  }
+  return true;
+};
 
-// 获取数据库对象
-const db = app.database();
+/**
+ * 执行登录
+ * @returns {Promise} 登录状态
+ */
+const login = async () => {
+  const auth = app.auth();
 
-// 获取云函数对象
-const functions = app.functions();
+  try {
+    // 默认采用匿名登录
+    await auth.signInAnonymously();
+    // 也可以换成跳转SDK 内置的登录页面，支持账号密码登录/手机号登录/微信登录,目前只支持 web 端，小程序等其他平台请自行实现登录逻辑
+    // await auth.toDefaultLoginPage()
+  } catch (error) {
+    console.error('登录失败:', error);
+    throw error;
+  }
+};
 
-// 获取云存储对象
-const storage = app.storage();
+/**
+ * 确保用户已登录
+ * @returns {Promise} 登录状态
+ */
+export const ensureLogin = async () => {
+  // 检查环境配置
+  if (!checkEnvironment()) {
+    throw new Error('环境ID未配置');
+  }
+
+  const auth = app.auth();
+
+  try {
+    // 检查当前登录状态
+    let loginState = await auth.getLoginState();
+
+    if (loginState && loginState.user) {
+      // 已登录，返回当前状态
+      console.log('用户已登录');
+      return loginState;
+    } else {
+      // 未登录，执行匿名登录
+      console.log('用户未登录，执行登录...');
+       await login();
+       loginState = await auth.getLoginState();
+      return loginState;
+    }
+  } catch (error) {
+    console.error('登录失败:', error);
+  }
+};
 
 /**
  * 初始化云开发
@@ -36,18 +105,8 @@ const storage = app.storage();
  */
 export async function initCloudBase() {
   try {
-    // 检查登录状态
-    const loginState = auth.hasLoginState();
-    
-    if (!loginState) {
-      // 匿名登录
-      await auth.signInAnonymously();
-      console.log('云开发匿名登录成功');
-    }
-    
-    const loginScope = await auth.loginScope();
-    console.log('当前登录状态:', loginScope);
-    
+    await ensureLogin();
+    console.log('云开发初始化成功');
     return true;
   } catch (error) {
     console.error('云开发初始化失败:', error);
@@ -56,112 +115,28 @@ export async function initCloudBase() {
 }
 
 /**
- * 获取云开发实例
+ * 退出登录（注意：匿名登录无法退出）
+ * @returns {Promise}
  */
-export function getCloudBaseApp() {
-  return app;
-}
+export const logout = async () => {
+  const auth = app.auth();
 
-/**
- * 获取数据库实例
- */
-export function getDatabase() {
-  return db;
-}
-
-/**
- * 获取云函数实例
- */
-export function getFunctions() {
-  return functions;
-}
-
-/**
- * 获取云存储实例
- */
-export function getStorage() {
-  return storage;
-}
-
-/**
- * 获取认证实例
- */
-export function getAuth() {
-  return auth;
-}
-
-/**
- * 调用云函数
- * @param name 云函数名称
- * @param data 传递的数据
- */
-export async function callFunction(name: string, data?: any) {
   try {
-    const result = await functions.callFunction({
-      name,
-      data
-    });
-    return result;
+    await auth.signOut();
+    return { success: true, message: '已成功退出登录' };
   } catch (error) {
-    console.error('调用云函数失败:', error);
+    console.error('退出登录失败:', error);
     throw error;
   }
-}
+};
 
-/**
- * 上传文件到云存储
- * @param cloudPath 云端路径
- * @param filePath 本地文件路径
- * @param onProgress 上传进度回调
- */
-export async function uploadFile(cloudPath: string, filePath: string, onProgress?: (progress: number) => void) {
-  try {
-    const result = await storage.uploadFile({
-      cloudPath,
-      filePath,
-      onUploadProgress: (progressEvent: any) => {
-        if (onProgress) {
-          const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-          onProgress(progress);
-        }
-      }
-    });
-    return result;
-  } catch (error) {
-    console.error('上传文件失败:', error);
-    throw error;
-  }
-}
-
-/**
- * 下载文件
- * @param fileID 文件ID
- */
-export async function downloadFile(fileID: string) {
-  try {
-    const result = await storage.downloadFile({
-      fileID
-    });
-    return result;
-  } catch (error) {
-    console.error('下载文件失败:', error);
-    throw error;
-  }
-}
-
+// 默认导出
 export default {
+  init,
   app,
-  auth,
-  db,
-  functions,
-  storage,
-  initCloudBase,
-  getCloudBaseApp,
-  getDatabase,
-  getFunctions,
-  getStorage,
-  getAuth,
-  callFunction,
-  uploadFile,
-  downloadFile,
-}; 
+  ensureLogin,
+  logout,
+  checkEnvironment,
+  isValidEnvId,
+  initCloudBase
+};
