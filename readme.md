@@ -14,6 +14,7 @@
   - [💡 示例项目](#-示例项目)
     - [🌐 Web 应用](#-web-应用)
     - [📱 小程序](#-小程序)
+    - [🔄 跨端应用](#-跨端应用)
     - [🎮 小游戏](#-小游戏)
     - [⚡ 函数型托管](#-函数型托管)
     - [🤖 AI Agent 服务](#-ai-agent-服务)
@@ -34,14 +35,14 @@
 
 ### 🌐 Web 应用
 
-- [React 应用模板](./web/cloudbase-react-template) - 基于 React 的云开发应用模板，支持 [`CloudBase AI ToolKit`](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
-- [Vue 应用模板](./web/cloudbase-vue-template) - 基于 React 的云开发应用模板，支持 [`CloudBase AI ToolKit`](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
+- [React 应用模板](./web/cloudbase-react-template) - 基于 React 的云开发应用模板 [![AI ToolKit](https://img.shields.io/badge/AI%20ToolKit-🤖-blue?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM0LjY4NjMgMiAyIDQuNjg2MyAyIDhTNC42ODYzIDE0IDggMTRTMTQgMTEuMzEzNyAxNCA4UzExLjMxMzcgMiA4IDJaTTggMTJDNS43OTA5IDEyIDQgMTAuMjA5MSA0IDhTNS43OTA5IDQgOCA0UzEyIDUuNzkwOSAxMiA4UzEwLjIwOTEgMTIgOCAxMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDZDNi44OTU0IDYgNiA2Ljg5NTQgNiA4UzYuODk1NCA5IDggOVM5IDguMTA0NiA5IDhTOC4xMDQ2IDYgOCA2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
+- [Vue 应用模板](./web/cloudbase-vue-template) - 基于 Vue 的云开发应用模板 [![AI ToolKit](https://img.shields.io/badge/AI%20ToolKit-🤖-blue?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM0LjY4NjMgMiAyIDQuNjg2MyAyIDhTNC42ODYzIDE0IDggMTRTMTQgMTEuMzEzNyAxNCA4UzExLjMxMzcgMiA4IDJaTTggMTJDNS43OTA5IDEyIDQgMTAuMjA5MSA0IDhTNS43OTA5IDQgOCA0UzEyIDUuNzkwOSAxMiA4UzEwLjIwOTEgMTIgOCAxMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDZDNi44OTU0IDYgNiA2Ljg5NTQgNiA4UzYuODk1NCA5IDggOVM5IDguMTA0NiA5IDhTOC4xMDQ2IDYgOCA2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 - [文件上传下载](./web/tcb-demo-files) - 云开发文件存储示例
 - [截图工具](./web/snapshots) - 网页快照与截图工具
 
 ### 📱 小程序
 
-- [小程序应用模板](./web/cloudbase-react-template) - 小程序云开发应用模板，支持 [`CloudBase AI ToolKit`](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
+- [小程序应用模板](./miniprogram/cloudbase-miniprogram-template) - 小程序云开发应用模板 [![AI ToolKit](https://img.shields.io/badge/AI%20ToolKit-🤖-blue?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM0LjY4NjMgMiAyIDQuNjg2MyAyIDhTNC42ODYzIDE0IDggMTRTMTQgMTEuMzEzNyAxNCA4UzExLjMxMzcgMiA4IDJaTTggMTJDNS43OTA5IDEyIDQgMTAuMjA5MSA0IDhTNS43OTA5IDQgOCA0UzEyIDUuNzkwOSAxMiA4UzEwLjIwOTEgMTIgOCAxMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDZDNi44OTU0IDYgNiA2Ljg5NTQgNiA4UzYuODk1NCA5IDggOVM5IDguMTA0NiA5IDhTOC4xMDQ2IDYgOCA2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 - [AgentUI](./miniprogram/tcb-agent-ui) - 云开发 Agent UI AI 智能对话小程序
 - [AI 相机](./miniprogram/tcb-demo-AICamera) - 基于云开发的 AI 相机小程序
 - [博客](./miniprogram/tcb-demo-blog) - 基于云开发的博客小程序
@@ -66,6 +67,10 @@
 - [商城示例](./miniprogram/tcb-shop) - 基于云开发的商城小程序
 - [官网模板](./miniprogram/tcb-official-website) - 基于云开发的官网模板小程序
 - [订阅消息](./miniprogram/subscription-message) - 订阅消息示例
+
+### 🔄 跨端应用
+
+- [UniApp 应用模板](./universal/cloudbase-uniapp-template) - 基于 UniApp 的云开发跨端应用模板 ，可编译到 H5 和微信小程序 [![AI ToolKit](https://img.shields.io/badge/AI%20ToolKit-🤖-blue?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM0LjY4NjMgMiAyIDQuNjg2MyAyIDhTNC42ODYzIDE0IDggMTRTMTQgMTEuMzEzNyAxNCA4UzExLjMxMzcgMiA4IDJaTTggMTJDNS43OTA5IDEyIDQgMTAuMjA5MSA0IDhTNS43OTA5IDQgOCA0UzEyIDUuNzkwOSAxMiA4UzEwLjIwOTEgMTIgOCAxMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDZDNi44OTU0IDYgNiA2Ljg5NTQgNiA4UzYuODk1NCA5IDggOVM5IDguMTA0NiA5IDhTOC4xMDQ2IDYgOCA2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
 ### 🎮 小游戏
 
