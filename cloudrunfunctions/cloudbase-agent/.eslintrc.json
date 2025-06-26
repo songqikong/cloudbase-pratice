@@ -1,0 +1,37 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["node", "simple-import-sort", "@typescript-eslint"],
+  "rules": {
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "object-curly-spacing": ["error", "always"],
+    "no-multi-assign": "error",
+    "spaced-comment": ["error", "always"],
+    "comma-dangle": ["error", "always-multiline"],
+    "semi": ["error", "always"],
+    "max-len": ["error", { "code": 140 }],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "space-before-function-paren": [
+      "error",
+      { "anonymous": "always", "named": "never", "asyncArrow": "always" }
+    ],
+    "block-scoped-var": "error",
+    "eqeqeq": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "eol-last": "error",
+    "prefer-arrow-callback": "error",
+    "no-trailing-spaces": "error",
+    "quotes": ["warn", "single", { "avoidEscape": true }],
+    "node/no-missing-import": "off",
+    "node/no-unsupported-features/es-syntax": "off",
+    "@typescript-eslint/no-explicit-any": "off"
+  },
+  "ignorePatterns": ["dist/*", "node_modules/*"],
+  "overrides": []
+}
