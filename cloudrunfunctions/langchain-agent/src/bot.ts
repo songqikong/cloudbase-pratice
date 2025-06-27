@@ -91,37 +91,6 @@ export class MyBot extends BotCore implements IBot {
     return tools
   }
 
-  // async getRetrieverTool() {
-  //   const embeddings = new TencentHunyuanEmbeddings();
-  //   const loader = new CheerioWebBaseLoader(
-  //     "https://docs.cloudbase.net/ai/FAQ"
-  //   );
-  //   const docs = await loader.load();
-  //   console.log('docs', docs)
-  //   const splitter = new RecursiveCharacterTextSplitter({
-  //     chunkSize: 500,
-  //     chunkOverlap: 100,
-  //   });
-  //   const documents = await splitter.splitDocuments(docs);
-  //   console.log('documents', documents)
-  //   const vectorStore = await MemoryVectorStore.fromDocuments(
-  //     documents,
-  //     embeddings
-  //   );
-  //   const retriever = vectorStore.asRetriever();
-
-  //   const retrieverTool = new DynamicTool({
-  //     name: "tcb_faq_rag",
-  //     description: "在云开发AI FAQ 知识库中检索相关内容",
-  //     func: async (input: string) => {
-  //       const docs = await retriever.getRelevantDocuments(input);
-  //       console.log('retrieve docs', docs)
-  //       return docs.map(d => d.pageContent).join("\n");
-  //     },
-  //   });
-  //   return retrieverTool;
-  // }
-
   async sendMessage({ msg, files = [] }: ExtendedSendMessageInput): Promise<void> {
     const envId =
       this.context.extendedContext?.envId || process.env.CLOUDBASE_ENV_ID;
