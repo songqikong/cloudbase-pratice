@@ -15,7 +15,6 @@
     - [🌐 Web 应用](#-web-应用)
     - [📱 小程序](#-小程序)
     - [🔄 跨端应用](#-跨端应用)
-    - [🎮 小游戏](#-小游戏)
     - [⚡ 函数型托管](#-函数型托管)
     - [🤖 AI Agent 服务](#-ai-agent-服务)
     - [🔗 MCP Server](#-mcp-server)
@@ -35,8 +34,8 @@
 
 ### 🌐 Web 应用
 
-- [五子棋实时联机对战](./web/gomoku-game) - 
-一个完全通过**AI编程**开发的实时联机对战五子棋应用，基于 Vue 3 + Vite + 腾讯云开发（CloudBase）构建，展示了AI辅助开发全栈应用的完整过程。 [![AI ToolKit](https://img.shields.io/badge/AI%20ToolKit-🤖-blue?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM0LjY4NjMgMiAyIDQuNjg2MyAyIDhTNC42ODYzIDE0IDggMTRTMTQgMTEuMzEzNyAxNCA4UzExLjMxMzcgMiA4IDJaTTggMTJDNS43OTA5IDEyIDQgMTAuMjA5MSA0IDhTNS43OTA5IDQgOCA0UzEyIDUuNzkwOSAxMiA4UzEwLjIwOTEgMTIgOCAxMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDZDNi44OTU0IDYgNiA2Ljg5NTQgNiA4UzYuODk1NCA5IDggOVM5IDguMTA0NiA5IDhTOC4xMDQ2IDYgOCA2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
+- [五子棋实时联机对战](./web/gomoku-game) -
+  一个完全通过**AI 编程**开发的实时联机对战五子棋应用，基于 Vue 3 + Vite + 腾讯云开发（CloudBase）构建，展示了 AI 辅助开发全栈应用的完整过程。 [![AI ToolKit](https://img.shields.io/badge/AI%20ToolKit-🤖-blue?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM0LjY4NjMgMiAyIDQuNjg2MyAyIDhTNC42ODYzIDE0IDggMTRTMTQgMTEuMzEzNyAxNCA4UzExLjMxMzcgMiA4IDJaTTggMTJDNS43OTA5IDEyIDQgMTAuMjA5MSA0IDhTNS43OTA5IDQgOCA0UzEyIDUuNzkwOSAxMiA4UzEwLjIwOTEgMTIgOCAxMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDZDNi44OTU0IDYgNiA2Ljg5NTQgNiA4UzYuODk1NCA5IDggOVM5IDguMTA0NiA5IDhTOC4xMDQ2IDYgOCA2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 - [React 应用模板](./web/cloudbase-react-template) - 基于 React 的云开发应用模板 [![AI ToolKit](https://img.shields.io/badge/AI%20ToolKit-🤖-blue?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM0LjY4NjMgMiAyIDQuNjg2MyAyIDhTNC42ODYzIDE0IDggMTRTMTQgMTEuMzEzNyAxNCA4UzExLjMxMzcgMiA4IDJaTTggMTJDNS43OTA5IDEyIDQgMTAuMjA5MSA0IDhTNS43OTA5IDQgOCA0UzEyIDUuNzkwOSAxMiA4UzEwLjIwOTEgMTIgOCAxMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDZDNi44OTU0IDYgNiA2Ljg5NTQgNiA4UzYuODk1NCA5IDggOVM5IDguMTA0NiA5IDhTOC4xMDQ2IDYgOCA2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 - [Vue 应用模板](./web/cloudbase-vue-template) - 基于 Vue 的云开发应用模板 [![AI ToolKit](https://img.shields.io/badge/AI%20ToolKit-🤖-blue?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM0LjY4NjMgMiAyIDQuNjg2MyAyIDhTNC42ODYzIDE0IDggMTRTMTQgMTEuMzEzNyAxNCA4UzExLjMxMzcgMiA4IDJaTTggMTJDNS43OTA5IDEyIDQgMTAuMjA5MSA0IDhTNS43OTA5IDQgOCA0UzEyIDUuNzkwOSAxMiA4UzEwLjIwOTEgMTIgOCAxMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDZDNi44OTU0IDYgNiA2Ljg5NTQgNiA4UzYuODk1NCA5IDggOVM5IDguMTA0NiA5IDhTOC4xMDQ2IDYgOCA2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 - [文件上传下载](./web/tcb-demo-files) - 云开发文件存储示例
@@ -45,7 +44,7 @@
 ### 📱 小程序
 
 - [小程序应用模板](./miniprogram/cloudbase-miniprogram-template) - 小程序云开发应用模板 [![AI ToolKit](https://img.shields.io/badge/AI%20ToolKit-🤖-blue?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM0LjY4NjMgMiAyIDQuNjg2MyAyIDhTNC42ODYzIDE0IDggMTRTMTQgMTEuMzEzNyAxNCA4UzExLjMxMzcgMiA4IDJaTTggMTJDNS43OTA5IDEyIDQgMTAuMjA5MSA0IDhTNS43OTA5IDQgOCA0UzEyIDUuNzkwOSAxMiA4UzEwLjIwOTEgMTIgOCAxMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDZDNi44OTU0IDYgNiA2Ljg5NTQgNiA4UzYuODk1NCA5IDggOVM5IDguMTA0NiA5IDhTOC4xMDQ2IDYgOCA2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
-- [脱单课程小程序](./miniprogram/dating) - 一个完全通过**AI编程**开发的脱单课程预约小程序，基于微信小程序 + 腾讯云开发（CloudBase）构建，展示了AI辅助开发全栈应用的完整过程。 [![AI ToolKit](https://img.shields.io/badge/AI%20ToolKit-🤖-blue?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM0LjY4NjMgMiAyIDQuNjg2MyAyIDhTNC42ODYzIDE0IDggMTRTMTQgMTEuMzEzNyAxNCA4UzExLjMxMzcgMiA4IDJaTTggMTJDNS43OTA5IDEyIDQgMTAuMjA5MSA0IDhTNS43OTA5IDQgOCA0UzEyIDUuNzkwOSAxMiA4UzEwLjIwOTEgMTIgOCAxMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDZDNi44OTU0IDYgNiA2Ljg5NTQgNiA4UzYuODk1NCA5IDggOVM5IDguMTA0NiA5IDhTOC4xMDQ2IDYgOCA2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
+- [脱单课程小程序](./miniprogram/dating) - 一个完全通过**AI 编程**开发的脱单课程预约小程序，基于微信小程序 + 腾讯云开发（CloudBase）构建，展示了 AI 辅助开发全栈应用的完整过程。 [![AI ToolKit](https://img.shields.io/badge/AI%20ToolKit-🤖-blue?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM0LjY4NjMgMiAyIDQuNjg2MyAyIDhTNC42ODYzIDE0IDggMTRTMTQgMTEuMzEzNyAxNCA4UzExLjMxMzcgMiA4IDJaTTggMTJDNS43OTA5IDEyIDQgMTAuMjA5MSA0IDhTNS43OTA5IDQgOCA0UzEyIDUuNzkwOSAxMiA4UzEwLjIwOTEgMTIgOCAxMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDZDNi44OTU0IDYgNiA2Ljg5NTQgNiA4UzYuODk1NCA5IDggOVM5IDguMTA0NiA5IDhTOC4xMDQ2IDYgOCA2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 - [AgentUI](./miniprogram/tcb-agent-ui) - 云开发 Agent UI AI 智能对话小程序
 - [AI 相机](./miniprogram/tcb-demo-AICamera) - 基于云开发的 AI 相机小程序
 - [博客](./miniprogram/tcb-demo-blog) - 基于云开发的博客小程序
@@ -75,7 +74,6 @@
 
 - [UniApp 应用模板](./universal/cloudbase-uniapp-template) - 基于 UniApp 的云开发跨端应用模板 ，可编译到 H5 和微信小程序 [![AI ToolKit](https://img.shields.io/badge/AI%20ToolKit-🤖-blue?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM0LjY4NjMgMiAyIDQuNjg2MyAyIDhTNC42ODYzIDE0IDggMTRTMTQgMTEuMzEzNyAxNCA4UzExLjMxMzcgMiA4IDJaTTggMTJDNS43OTA5IDEyIDQgMTAuMjA5MSA0IDhTNS43OTA5IDQgOCA0UzEyIDUuNzkwOSAxMiA4UzEwLjIwOTEgMTIgOCAxMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04IDZDNi44OTU0IDYgNiA2Ljg5NTQgNiA4UzYuODk1NCA5IDggOVM5IDguMTA0NiA5IDhTOC4xMDQ2IDYgOCA2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-
 ### ⚡ 函数型托管
 
 - [TypeScript 多函数](./cloudrunfunctions/ts-multiple-functions) - 基于 TypeScript 的多函数示例
@@ -86,11 +84,12 @@
 
 - [DeepSeek Agent](./cloudrunfunctions/deepseek-agent) - DeepSeek 大模型 Agent 示例
 - [Mastra Agent](./cloudrunfunctions/mastra-agent) - Mastra Agent 示例
-- [元器 Agent](./cloudrunfunctions/yuanqi-agent) - 元器 Agent示例
+- [元器 Agent](./cloudrunfunctions/yuanqi-agent) - 元器 Agent 示例
 - [空白 Agent 模板](./cloudrunfunctions/empty-agent) - 空白 Agent 模板
 - [大模型天气 Agent](./cloudrunfunctions/llm-based-weather-agent) - 基于大模型的天气 Agent 示例
-- [腾讯云智能体开发平台Agent](./cloudrunfunctions/lke-agent) - 腾讯云智能体开发平台 Agent 示例
+- [腾讯云智能体开发平台 Agent](./cloudrunfunctions/lke-agent) - 腾讯云智能体开发平台 Agent 示例
 - [n8n Agent](./cloudrunfunctions/n8n-agent) - 对接 n8n workflow 的 Agent 示例
+- [CloudBase Agent](./cloudrunfunctions/cloudbase-agent) - 函数型云托管的 Agent 示例
 
 ### 🔗 MCP Server
 
@@ -98,11 +97,9 @@
 - [Manus MCP](./cloudrunfunctions/cloudrun-mcp-mini-manus) - Manus MCP 示例
 - [模拟医院 MCP](./cloudrunfunctions/cloudrun-mcp-mock-hospital) - 模拟医院 MCP 示例
 
-
 ### 🔧 低代码应用
 
 - [客户关系管理系统](./lowcode/scrm-demo) - 基于低代码平台的客户关系管理系统示例
-
 
 ## 🤝 贡献指南
 
