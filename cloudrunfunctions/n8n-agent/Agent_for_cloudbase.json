@@ -4,55 +4,48 @@
     {
       "parameters": {
         "content": "## AI Agent with Webhook for tencent cloudbase",
-        "height": 525,
-        "width": 1596,
+        "height": 545,
+        "width": 1736,
         "color": 6
       },
-      "id": "311f1c66-2a4d-4081-9651-0c145fbbfdc9",
+      "id": "47881833-9939-4ac1-b725-f3e919066eaf",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        400,
-        60
+        460,
+        -380
       ]
     },
     {
       "parameters": {
         "options": {}
       },
-      "id": "ba32e0f3-69a9-4985-b3cf-bb9397c8d5a5",
+      "id": "9f191957-6b6d-4e46-8630-3c0d6843e06e",
       "name": "Respond to Webhook",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        1760,
-        100
+        1980,
+        -340
       ]
     },
     {
       "parameters": {
         "httpMethod": "POST",
         "path": "invoke-n8n-agent",
-        "authentication": "headerAuth",
         "responseMode": "responseNode",
         "options": {}
       },
-      "id": "38450b83-7618-4b84-9f02-745bcc661179",
+      "id": "aa490a1b-ddfc-4daf-b993-f79c77b055a8",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        460,
-        180
+        500,
+        -320
       ],
-      "webhookId": "7f8a71dd-b98a-4c87-aa3c-c0f7c3b63535",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "7VvbFImfNAaqGzdJ",
-          "name": "Header Auth account"
-        }
-      }
+      "webhookId": "7f8a71dd-b98a-4c87-aa3c-c0f7c3b63535"
     },
     {
       "parameters": {
@@ -71,10 +64,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1540,
-        100
+        1760,
+        -340
       ],
-      "id": "8d37a08b-4a17-4f50-af46-69b46ff29396",
+      "id": "8c645094-b838-4340-88ac-b98eaaa67a0a",
       "name": "Edit Fields (Set Output Field)"
     },
     {
@@ -85,13 +78,13 @@
           "systemMessage": "You are a personal assistant who helps answer questions.\n\nYou are given tools to perform search.\n\nAlways tell the user if you didn't find the answer. Don't make something up just to please them."
         }
       },
-      "id": "f338f417-723a-4f06-99e8-23785f035162",
+      "id": "949002c4-82e9-42bf-80b3-d1cd7d817396",
       "name": "Primary AI Agent",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.6,
       "position": [
-        1060,
-        100
+        1280,
+        -340
       ]
     },
     {
@@ -101,14 +94,14 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
       "typeVersion": 1,
       "position": [
-        1200,
-        360
+        1420,
+        -80
       ],
-      "id": "816769d8-c7eb-4d6f-bbe7-16621f83c36b",
+      "id": "1296c274-9fb9-45e7-ac4f-9c03edc7cc9d",
       "name": "DeepSeek Chat Model1",
       "credentials": {
         "deepSeekApi": {
-          "id": "kejR9i5f71CrhQ6s",
+          "id": "XCXgENoq3qLRXI8E",
           "name": "DeepSeek account"
         }
       }
@@ -121,33 +114,33 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        1360,
-        400
+        1580,
+        -40
       ],
-      "id": "5610992c-163a-4736-9fec-031f9e60966d",
+      "id": "4b073180-80d1-4da9-87c1-3aeb89367838",
       "name": "Simple Memory"
     },
     {
       "parameters": {
-        "sseEndpoint": "your-mcp-server-url",
+        "sseEndpoint": "https://<your-mcp-server-url>",
         "authentication": "bearerAuth",
         "include": "selected",
         "includeTools": [
-          "search_web",
-          "analyze_vision"
+          "search_web"
         ]
       },
       "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
       "typeVersion": 1,
       "position": [
-        1560,
-        400
+        1780,
+        -40
       ],
-      "id": "5b1e9eeb-e39e-4556-9371-2abcca92d14e",
+      "id": "3328f1a3-becd-4faf-9906-817071aebe29",
       "name": "MCP Client",
+      "alwaysOutputData": false,
       "credentials": {
         "httpBearerAuth": {
-          "id": "lWfZJdkiY6AQQpeu",
+          "id": "NFawv6XVgBhUkAge",
           "name": "Bearer Auth account"
         }
       }
@@ -159,72 +152,76 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
       "typeVersion": 1,
       "position": [
-        900,
-        440
+        1100,
+        20
       ],
-      "id": "fbf08793-fd6f-42bc-aa7e-c00b63b27f4b",
+      "id": "f32fa4e7-1330-4db3-8981-fb1bc7e69cfa",
       "name": "DeepSeek Chat Model",
       "credentials": {
         "deepSeekApi": {
-          "id": "kejR9i5f71CrhQ6s",
+          "id": "XCXgENoq3qLRXI8E",
           "name": "DeepSeek account"
         }
       }
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "f5ebbd4f-6549-4a31-b3f8-eee7634dc439",
-              "leftValue": "={{ $json.body.sessionId }}",
-              "rightValue": "None or Undefined",
-              "operator": {
-                "type": "string",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        660,
-        180
-      ],
-      "id": "34b51990-9751-4b38-8534-4ff49e8a4bba",
-      "name": "If"
-    },
-    {
-      "parameters": {
         "promptType": "define",
-        "text": "={{ $('Webhook').item.json.body.chatInput }}",
-        "messages": {
-          "messageValues": [
-            {
-              "message": "You are a helpful assistant that recommends similar or related questions based on user input. Your task is to:\n\n1. Analyze the user's question to understand its core topic and intent\n2. Generate 3 related questions that:\n   - Cover different aspects of the same topic\n   - Ask for more specific details\n   - Explore related concepts\n   - Help users get more comprehensive information\n\nGuidelines for generating questions:\n- Keep questions clear and concise\n- Ensure questions are relevant to the original topic\n- Avoid repetitive or redundant questions\n- Use natural, conversational language\n- Consider different user knowledge levels\n\nFormat your response as a numbered list of questions, with each question on a new line.\n\nExample:\nIf user asks: \"How do I make chocolate cake?\"\nYou might recommend:\n1. What are the essential ingredients for a chocolate cake?\n2. How long should I bake a chocolate cake?\n3. What's the best way to frost a chocolate cake?\n"
-            }
-          ]
-        }
+        "text": "={{ $('Webhook').item.json.body.chatInput }}"
       },
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.5,
       "position": [
-        860,
-        280
+        1060,
+        -140
       ],
-      "id": "0f19d6b5-e665-42eb-92a3-f4d993f21e23",
+      "id": "23f985d1-1917-4f7a-a808-37f14c8bce1c",
       "name": "Secondary LLM"
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $('Webhook').item.json.body.chatInput }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "complex",
+              "description": "用户输入为复杂任务，需要多步骤处理、工具调用或深度分析。包括但不限于：\n\n- 需要搜索外部信息的问题\n- 多步骤的问题解决或分析任务\n- 需要代码编写、调试或执行的请求\n- 复杂的数据处理或计算任务\n- 需要创建结构化内容（报告、方案、流程图等）\n- 涉及多个领域知识整合的问题\n- 需要实时信息或动态数据的查询\n- 工作流程设计或优化建议"
+            },
+            {
+              "category": "simple",
+              "description": "用户输入为简单、直接的问题或请求，可以通过单次LLM调用立即响应。包括但不限于：\n\n- 日常闲聊和问候（\"你好\"、\"今天天气怎么样\"）\n- 基础事实性问题（\"什么是人工智能\"、\"北京是中国的首都吗\"）\n- 简单的概念解释或定义\n- 情感支持或鼓励性对话\n- 基础的计算或转换（\"1+1等于多少\"）\n- 不需要外部工具或多步推理的问题"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1.1,
+      "position": [
+        740,
+        -320
+      ],
+      "id": "01fe400f-24c7-48ff-bdc2-2f6f9409f715",
+      "name": "Text Classifier"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        660,
+        -40
+      ],
+      "id": "b85340b2-3517-494b-825f-221f1d3fc7a5",
+      "name": "DeepSeek Chat Model2",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "XCXgENoq3qLRXI8E",
+          "name": "DeepSeek account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -233,7 +230,7 @@
       "main": [
         [
           {
-            "node": "If",
+            "node": "Text Classifier",
             "type": "main",
             "index": 0
           }
@@ -295,24 +292,6 @@
         ]
       ]
     },
-    "If": {
-      "main": [
-        [
-          {
-            "node": "Primary AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Secondary LLM",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Secondary LLM": {
       "main": [
         [
@@ -334,17 +313,46 @@
           }
         ]
       ]
+    },
+    "DeepSeek Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Classifier": {
+      "main": [
+        [
+          {
+            "node": "Primary AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Secondary LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": true,
+  "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "6e671464-eb69-4704-8944-277e9a61a253",
+  "versionId": "3dd2d4cd-5a77-4498-ad8e-3664aaaebfb2",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "2042190337e3d75f5eece6b584e8f5a21b6f341d14fef52aa71e880eecc94c70"
+    "instanceId": "da4a9e46b7274ae9c706f7e1854de006eb310cdf95541a24066fcaa26d2d8938"
   },
-  "id": "9qvi17nCV6nvO9TS",
+  "id": "R7WBvkUGs5k3fzbq",
   "tags": []
 }
