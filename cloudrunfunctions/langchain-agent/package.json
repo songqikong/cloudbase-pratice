@@ -14,12 +14,13 @@
 		"./src": "./src/index.ts"
 	},
 	"dependencies": {
-		"@cloudbase/aiagent-framework": "1.0.0-beta.9", 
+		"@cloudbase/aiagent-framework": "^1.0.0-beta.13",
 		"@langchain/community": "^0.3.45",
 		"@langchain/core": "^0.3.57",
-		"@langchain/deepseek": "^0.0.1", 
+		"@langchain/deepseek": "^0.0.1",
 		"@langchain/tavily": "^0.1.2",
-		"@langchain/textsplitters": "^0.1.0", 
+		"@langchain/textsplitters": "^0.1.0",
+		"js-yaml": "^4.1.0",
 		"langchain": "^0.3.27",
 		"zod": "^3.25.56"
 	},
@@ -27,6 +28,7 @@
 		"@cloudbase/cli": "^2.6.16",
 		"@cloudbase/functions-typings": "^1.0.0",
 		"@dotenvx/dotenvx": "^1.38.4",
+		"@types/js-yaml": "^4.0.9",
 		"@types/node": "^22.10.5",
 		"prettier": "3.5.3",
 		"typescript": "^5.7.2"
