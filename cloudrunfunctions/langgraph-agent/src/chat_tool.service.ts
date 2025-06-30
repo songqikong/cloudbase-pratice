@@ -87,7 +87,6 @@ export class ChatToolService {
 
   // 获取消息相关的文件信息
   async getSearchFileContent({ msg, files }: { msg: string, files: any[] }): Promise<string> {
-    console.log("************getSearchFileContent", msg, files)
     if (!this.botContext.info.searchFileEnable || !files || files.length === 0) {
       return '';
     }
