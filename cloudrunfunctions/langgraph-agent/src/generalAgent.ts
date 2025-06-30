@@ -3,6 +3,7 @@ import { createReactAgent } from "@langchain/langgraph/prebuilt";
 import { mcpToolToStructuredTool } from "./util.js";
 import { LanguageModelLike } from "@langchain/core/language_models/base";
 import { StructuredTool } from "langchain/tools";
+import { McpServer } from "./mcp";
 
 async function createAgentDescription(
   tools: StructuredTool[],
@@ -37,22 +38,32 @@ async function createAgentDescription(
 }
 
 export async function createGeneralAgent(
-  mcpClient: Client,
+  mcpClients: Record<string, Client>,
+  mcpServerList: McpServer[],
   llm: LanguageModelLike
 ) {
-  const { tools } = await mcpClient.listTools();
-  console.log("mcp tools", JSON.stringify(tools, null, 2));
-  const structuredTools = tools.map((tool) =>
-    mcpToolToStructuredTool(tool, mcpClient!)
-  );
+  const structuredToolsArray = await Promise.all(Object.entries(mcpClients).map(async ([mcpServerName, mcpClient]) => {
+    const curServer = mcpServerList.find((mcpServer) => mcpServer.name === mcpServerName);
+    if (curServer) {
+      const { tools } = await mcpClient.listTools();
+      const configToolNames = curServer.tools.map((t) => t.name);
+      let filteredTools = configToolNames.length ? tools.filter((tool) => curServer.tools.map((t) => t.name).includes(tool.name)) : tools;
+      console.log("mcp tools", JSON.stringify(filteredTools, null, 2));
+      const structuredTools = filteredTools.map((tool) =>
+        mcpToolToStructuredTool(tool, mcpClient!)
+      );
+      return structuredTools;
+    }
+    return [];
+  }));
 
   // 动态生成 Agent 描述
-  const prompt = await createAgentDescription(structuredTools, llm);
+  const prompt = await createAgentDescription(structuredToolsArray.flat(), llm);
 
   return {
     agent: createReactAgent({
       llm,
-      tools: structuredTools,
+      tools: structuredToolsArray.flat(),
       prompt,
       name: "generalAgent",
     }),
