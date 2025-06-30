@@ -17,9 +17,9 @@ initQuestions:
 # Agent 开启推荐问题功能
 isNeedRecommend: true
 # Agent 绑定知识库
-knowledgeBase: ['new_5c39']
+knowledgeBase: ['your-knowledge-base-id']
 # Agent 绑定数据模型
-databaseModel: ['kcb']
+databaseModel: ['your-database-model-id']
 # Agent 开启联网搜送功能
 searchNetworkEnable: true
 # Agent 开启文件对话功能
