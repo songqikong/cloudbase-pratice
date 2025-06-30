@@ -1,0 +1,25 @@
+import { BotConfig } from "./bot_config";
+
+export class BotInfo {
+  type!: string;
+  botId: string;
+  name: string;
+  agentSetting: string;
+  introduction: string;
+  initQuestions!: string[];
+  searchNetworkEnable: boolean;
+  searchFileEnable: boolean;
+  knowledgeBase: string[];
+  databaseModel: string[];
+
+  constructor(botId: string, botConfig: BotConfig) {
+    this.botId = botId;
+    this.name = botConfig.name;
+    this.agentSetting = botConfig.agentSetting;
+    this.introduction = botConfig.introduction;
+    this.searchNetworkEnable = botConfig.searchNetworkEnable;
+    this.searchFileEnable = botConfig.searchFileEnable;
+    this.databaseModel = botConfig.databaseModel;
+    this.knowledgeBase = botConfig.knowledgeBase;
+  }
+}

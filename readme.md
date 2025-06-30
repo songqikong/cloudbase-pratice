@@ -100,6 +100,8 @@
 - [腾讯云智能体开发平台 Agent](./cloudrunfunctions/lke-agent) - 腾讯云智能体开发平台 Agent 示例
 - [n8n Agent](./cloudrunfunctions/n8n-agent) - 对接 n8n workflow 的 Agent 示例
 - [CloudBase Agent](./cloudrunfunctions/cloudbase-agent) - 函数型云托管的 Agent 示例
+- [LangChain Agent](./cloudrunfunctions/langchain-agent) - 基于 LangChain 框架开发 的 Agent 示例
+- [LangGraph Agent](./cloudrunfunctions/langgraph-agent) - 对接 LangGraph 框架开发 的 Agent 示例
 
 ### 🔗 MCP Server
 
