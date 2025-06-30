@@ -77,6 +77,7 @@
 - [商城示例](./miniprogram/tcb-shop) - 基于云开发的商城小程序
 - [官网模板](./miniprogram/tcb-official-website) - 基于云开发的官网模板小程序
 - [订阅消息](./miniprogram/subscription-message) - 订阅消息示例
+- [小程序商城](./miniprogram/tcb-shop-ai-generate) - 基于云开发的AI生成商城小程序
 
 ### 🔄 跨端应用
 
