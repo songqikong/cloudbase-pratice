@@ -311,7 +311,7 @@ tcb login
 
 4. 部署应用
 ```bash
-tcb deploy
+tcb framework deploy
 ```
 
 ### 方式二：手动部署
