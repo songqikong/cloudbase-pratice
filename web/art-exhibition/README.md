@@ -10,9 +10,10 @@
 
 [![Powered by CloudBase](https://7463-tcb-advanced-a656fc-1257967285.tcb.qcloud.la/mcp/powered-by-cloudbase-badge.svg)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 
-> 本项目基于 [**CloudBase AI ToolKit**](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit) 开发，通过 AI 提示词和 MCP 协议+云开发，让开发更智能、更高效，支持 AI 生成全栈代码、一键部署至腾讯云开发（免服务器）、智能日志修复。
+> 本项目基于 [**CloudBase AI Builder**](https://tcb.cloud.tencent.com/dev#/ai-builder) 开发， 导出代码包之后使用[**CloudBase AI ToolKit**](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit) 二次开发开发，通过 AI 提示词和 MCP 协议+云开发，让开发更智能、更高效，支持 AI 生成全栈代码、一键部署至腾讯云开发（免服务器）、智能日志修复。
 
-首先可以按照 [CloudBase AI ToolKit 快速上手指南](https://docs.cloudbase.net/ai/cloudbase-ai-toolkit/getting-started) 准备好 AI 开发环境。
+1. 首先使用 [**CloudBase AI Builder**](https://tcb.cloud.tencent.com/dev#/ai-builder) 进行开发，开发预览完毕后可选择导出代码包进行二次开发
+2. 二次开发时可以按照 [CloudBase AI ToolKit 快速上手指南](https://docs.cloudbase.net/ai/cloudbase-ai-toolkit/getting-started) 准备好 AI 开发环境。
 
 以下是开发本项目时使用的完整提示词，展示了如何通过自然语言与 AI 协作完成全栈应用开发：
 
