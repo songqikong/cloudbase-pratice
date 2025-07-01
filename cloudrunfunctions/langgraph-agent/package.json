@@ -2,29 +2,28 @@
 	"name": "langgraph-agent",
 	"description": "LangGraph 函数型智能体模板",
 	"main": "src/index.ts",
-	"type": "module",
 	"scripts": {
 		"login": "tcb login",
 		"logout": "tcb logout",
 		"build": "tsc",
 		"build:w": "tsc -w",
-		"dev": "dotenvx run -f .env.development -- tcb cloudrunfunction run -w",
+		"dev": "dotenvx run -f .env -- tcb cloudrunfunction run -w",
 		"deploy": "tcb cloudrunfunction deploy"
 	},
 	"exports": {
 		"./src": "./src/index.ts"
 	},
 	"dependencies": {
-		"@cloudbase/aiagent-framework": "1.0.0-beta.9",
+		"@cloudbase/aiagent-framework": "1.0.0-beta.13",
 		"@cloudbase/mcp": "1.0.0-beta.26",
 		"@langchain/community": "^0.3.45",
 		"@langchain/core": "^0.3.57",
 		"@langchain/deepseek": "^0.0.1",
 		"@langchain/langgraph": "^0.3.1",
 		"@langchain/langgraph-supervisor": "^0.0.13",
-		"@langchain/tavily": "^0.1.2",
 		"@langchain/textsplitters": "^0.1.0",
-		"@modelcontextprotocol/sdk": "1.11.3",
+		"@modelcontextprotocol/sdk": "1.13.2",
+		"js-yaml": "^4.1.0",
 		"langchain": "^0.3.27",
 		"remeda": "^2.23.0",
 		"zod": "^3.25.56"
@@ -33,6 +32,7 @@
 		"@cloudbase/cli": "^2.6.16",
 		"@cloudbase/functions-typings": "^1.0.0",
 		"@dotenvx/dotenvx": "^1.38.4",
+		"@types/js-yaml": "^4.0.9",
 		"@types/node": "^22.10.5",
 		"prettier": "3.5.3",
 		"typescript": "^5.7.2"

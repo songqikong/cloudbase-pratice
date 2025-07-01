@@ -3,6 +3,7 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { BaseCallbackHandler } from "@langchain/core/callbacks/base";
 import { StructuredTool } from "langchain/tools";
 import { z, ZodTypeAny } from "zod";
+import * as crypto from 'crypto'
 
 // 简易实现 jsonSchema 转 zod schema
 function jsonSchemaToZodSchema(schema: any): ZodTypeAny {
@@ -87,6 +88,18 @@ class LLMInterceptorCallback extends BaseCallbackHandler {
     console.log("🚀 LLM 请求开始:", llm);
     console.log("发送的 Prompts:", JSON.stringify(prompts, null, 2));
     this.logSeparator();
+  }
+}
+
+export function genRandomStr(length: number): string {
+  return crypto.randomBytes(Math.ceil(length / 2)).toString('hex').slice(0, length);
+}
+
+export function safeJsonParse(jsonString: string, defaultValue = null) {
+  try {
+    return JSON.parse(jsonString);
+  } catch (error) {
+    return defaultValue;
   }
 }
 
