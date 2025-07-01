@@ -4,7 +4,7 @@
 
 ## 💻 效果演示
 
-![艺术展览预约系统](https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=400&fit=crop)
+![艺术展览预约系统](https://7463-tcb-advanced-a656fc-1257967285.tcb.qcloud.la/turbo-deploy/art-exhibition.jpg)
 
 ## 📝 AI 开发提示词记录
 
