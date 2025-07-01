@@ -26,11 +26,18 @@ searchNetworkEnable: true
 searchFileEnable: true
 mcpServerList:
   - tools:
-      - name: 'your-mcp-server1-tool1-name'
-      - name: 'your-mcp-server1-tool2-name'
-    url: https://{your-envId}.api.tcloudbasegateway.com/v1/cloudrun/{your-mcp-server1-name}/messages
-    name: 'your-mcp-server1-name'
+      - name: 'geocoder'
+      - name: 'placeSuggestion'
+    url: https://luke-agent-dev-7g1nc8tqc2ab76af.api.tcloudbasegateway.com/v1/cloudrun/mcp-tencent-map-xunif0/messages
+    name: 'mcp-tencent-map-xunif0'
+    transport: 'post'
   - tools:
-    - name: 'your-mcp-server2-tool1-name'
-    url: https://{your-envId}.api.tcloudbasegateway.com/v1/cloudrun/{your-mcp-server2-name}/messages
-    name: 'your-mcp-server2-name'
+      - name: 'generate'
+    url: https://luke-agent-dev-7g1nc8tqc2ab76af.api.tcloudbasegateway.com/v1/cloudrun/mcp-mermaid-ceh7gc/messages
+    name: 'mcp-mermaid-ceh7gc'
+    transport: 'streamable'
+  - tools:
+      - name: 'puppeteer_navigate'
+    url: https://luke-agent-dev-7g1nc8tqc2ab76af.api.tcloudbasegateway.com/v1/cloudrun/mcp-puppeteer-hqqgrn/messages
+    name: 'mcp-puppeteer-hqqgrn'
+    transport: 'sse'

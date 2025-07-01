@@ -1,12 +1,12 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
+		"module": "Node16",
 		"rootDir": "src",
 		"outDir": "dist",
 		"target": "ES2015",
 		"strict": true,
 		"skipLibCheck": true,
-		"moduleResolution": "node"
+		"moduleResolution": "node16"
 	},
 	"include": ["**/*.ts"]
 }

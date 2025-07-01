@@ -38,13 +38,13 @@ async function createAgentDescription(
 }
 
 export async function createGeneralAgent(
-  mcpClients: Record<string, Client>,
+  mcpClients: Record<string, Client | null>,
   mcpServerList: McpServer[],
   llm: LanguageModelLike
 ) {
   const structuredToolsArray = await Promise.all(Object.entries(mcpClients).map(async ([mcpServerName, mcpClient]) => {
     const curServer = mcpServerList.find((mcpServer) => mcpServer.name === mcpServerName);
-    if (curServer) {
+    if (curServer && mcpClient) {
       const { tools } = await mcpClient.listTools();
       const configToolNames = curServer.tools.map((t) => t.name);
       let filteredTools = configToolNames.length ? tools.filter((tool) => curServer.tools.map((t) => t.name).includes(tool.name)) : tools;

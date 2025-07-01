@@ -7,7 +7,7 @@
 		"logout": "tcb logout",
 		"build": "tsc",
 		"build:w": "tsc -w",
-		"dev": "dotenvx run -f .env.development -- tcb cloudrunfunction run -w",
+		"dev": "dotenvx run -f .env -- tcb cloudrunfunction run -w",
 		"deploy": "tcb cloudrunfunction deploy"
 	},
 	"exports": {
@@ -21,7 +21,6 @@
 		"@langchain/deepseek": "^0.0.1",
 		"@langchain/langgraph": "^0.3.1",
 		"@langchain/langgraph-supervisor": "^0.0.13",
-		"@langchain/tavily": "^0.1.2",
 		"@langchain/textsplitters": "^0.1.0",
 		"@modelcontextprotocol/sdk": "1.11.3",
 		"js-yaml": "^4.1.0",

@@ -76,7 +76,7 @@ export class MyBot extends BotCore implements IBot {
       agents.push(searchFileAgent);
     }
 
-    if (this.botContext.info.knowledgeBase.length > 0) {
+    if (this.botContext.info.knowledgeBase?.length) {
       const searchKnowledgeTool = await this.chatToolService.getSearchKnowledgeTool()
       const searchKnowledgeAgent = createReactAgent({
         llm,
@@ -96,7 +96,7 @@ export class MyBot extends BotCore implements IBot {
       agents.push(searchKnowledgeAgent);
     }
 
-    if (this.botContext.info.databaseModel.length > 0) {
+    if (this.botContext.info.databaseModel?.length) {
       const searchDatabaseTool = await this.chatToolService.getSearchDatabaseTool()
       const searchDatabaseAgent = createReactAgent({
         llm,
