@@ -8,8 +8,8 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 # 将本地代码复制到容器内
 COPY index.php /var/www/html/
 
-# Apache 配置文件内使用 8080 端口
-RUN sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+# Apache 配置文件内使用 80 端口
+RUN sed -i 's/80/80/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
 EXPOSE 80
 
