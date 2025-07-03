@@ -202,7 +202,6 @@ export class ChatToolService {
           buffer = events[events.length - 1];
         } while (!done);
       }
-      //   console.log("查询数据库内容结果:", databaseInfo);
       return databaseInfo;
     } catch (error) {
       console.log('查询数据库失败 error:', error);
@@ -319,7 +318,7 @@ export class ChatToolService {
   async getSearchDatabaseTool() {
     const searchDatabaseTool = new DynamicTool({
       name: "search_database",
-      description: "Search the database for the latest information",
+      description: "查询云开发数据模型并返回查询结果，当用户询问数据模型，数据表查询问题时必须调用此工具",
       func: async (input: string) => {
         const databaseContent = await this.getSearchDatabaseContent({ msg: input });
         return databaseContent;
