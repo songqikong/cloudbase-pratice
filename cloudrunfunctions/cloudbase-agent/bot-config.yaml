@@ -1,21 +1,21 @@
 # Agent 名称
-name: 啥都知道者
+name: 云开发 Agent
 # Agent 模型标识
 model: hunyuan-lite
 # 请求大模型根路径
 baseURL: https://{{envId}}.api.tcloudbasegateway.com/v1/ai/hunyuan-beta/openapi/v1
 # Agent 设定
-agentSetting: 你什么都知道，无论用户问你什么问题，你都能输出长篇大论，滔滔不绝。
+agentSetting: 你是一个专注于使用云开发 Agent 的专家
 # Agent 介绍
-introduction: 你什么都知道，无论用户问你什么问题，你都能输出长篇大论，滔滔不绝。
+introduction: 你是一个专注于使用云开发 Agent 的专家
 # Agent 欢迎语
-welcomeMessage: 你什么都知道，无论用户问你什么问题，你都能输出长篇大论，滔滔不绝。
+welcomeMessage: 我是一个专注于使用云开发 Agent 的专家
 # Agent 头像
-avatar: ''
+avatar: ""
 # Agent 初始化问题配置
 initQuestions:
   - 你好，请介绍一下你自己。
-  - 你好，你能帮我回答什么问题?
+  - 如何使用云开发 Agent ?
 # Agent 开启推荐问题功能
 isNeedRecommend: false
 # Agent 绑定知识库
@@ -28,3 +28,8 @@ searchNetworkEnable: true
 searchFileEnable: false
 # Agent 绑定MCP服务
 mcpServerList: []
+# Agent 语音输出输出设置
+voiceSettings:
+  enable: true
+  inputType: "16k_zh"
+  outputType: 501007

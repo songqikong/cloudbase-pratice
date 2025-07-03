@@ -1,8 +1,8 @@
-# 基于函数型云托管的 Agent 项目
+# 基于函数型云托管的Agent项目
 
-本示例项目为函数型云托管的 Agent 项目示例，包括云函数部分。是文档 [函数型 Agent](https://docs.cloudbase.net/ai/cbrf-agent/intro) 的一个示例项目。
+本示例项目为函数型云托管的Agent项目示例，包括云函数部分。是文档 [函数型 Agent](https://docs.cloudbase.net/ai/cbrf-agent/intro) 的一个示例项目。
 
-本示例项目主要演示如何在本地开发环境中开发调试函数型 Agent，以及如何实现 Agent 中的基础对话、联网搜索、知识库查询、文件查询等功能。
+本示例项目主要演示如何在本地开发环境中开发调试函数型 Agent，以及如何实现Agent 中的基础对话、联网搜索、知识库查询、文件查询等功能。
 
 ## 目录说明
 
@@ -10,15 +10,15 @@
 $ tree -L 3
 .
 ├── README.md
-├── bot-config.yaml   ## agent 配置
+├── bot-config.yaml           ## agent 配置
 ├── cloudbase-functions.json  ## 项目路由配置
 ├── package-lock.json
 ├── package.json
 ├── src
-│   ├── bot.ts
 │   ├── bot_config.ts
 │   ├── bot_context.ts
 │   ├── bot_info.ts
+│   ├── bot.ts
 │   ├── chat_context.service.ts
 │   ├── chat_history.service.ts
 │   ├── chat_main.service.ts
@@ -26,7 +26,7 @@ $ tree -L 3
 │   ├── chat_tool.service.ts
 │   ├── config.ts
 │   ├── constant.ts
-│   ├── index.ts
+│   ├── index.ts  # 函数入口
 │   ├── llm.ts
 │   ├── mcp.ts
 │   ├── tcb.ts
@@ -83,13 +83,55 @@ tcb cloudrun run -w --dotEnvFilePath=.env --enableCors=true --runMode agent -e {
 
 服务启动后，会自动打开前端调试页面：<http://127.0.0.1:3000/cloudrun-run-ui/index.html>，可以直接在浏览器中进行调试。
 
-也可以通过 curl 调用 Agent 服务
+### curl 调用示例
 
 ```sh
 curl 'http://127.0.0.1:3000/v1/aibot/bots/{your-botId}/send-message' \
   -H 'Accept: text/event-stream' \
   -H 'Content-Type: application/json' \
   --data-raw '{"msg":"你好","searchEnable":false,"files":[]}'
+```
+
+```sh
+curl 'http://127.0.0.1:3000/v1/aibot/bots/{your-botId}/send-message' \
+  -H 'Accept: text/event-stream' \
+  -H 'Content-Type: application/json' \
+  --data-raw '{"msg":"最近天气怎么样？","searchEnable":true,"files":[]}'
+```
+
+```sh
+curl 'http://127.0.0.1:3000/v1/aibot/bots/{your-botId}/send-message' \
+  -H 'Accept: text/event-stream' \
+  -H 'Content-Type: application/json' \
+  --data-raw '{"msg":"最近天气怎么样？","searchEnable":true,"files":["cloud://xxxx.4321-xxxx-0000000000/path-to-file"]}'
+```
+
+```sh
+curl 'http://127.0.0.1:3000/v1/aibot/bots/{your-botId}/send-message' \
+  -H 'Accept: text/event-stream' \
+  -H 'Content-Type: application/json' \
+  --data-raw '{"msg":"概括下文件内容？","searchEnable":true,"files":["cloud://xxxx.4321-xxxx-0000000000/path-to-file"]}'
+```
+
+```sh
+curl 'http://127.0.0.1:3000/v1/aibot/bots/{your-botId}/send-message' \
+  -H 'Accept: text/event-stream' \
+  -H 'Content-Type: application/json' \
+  --data-raw '{"msg":"介绍一下函数型云托管？","searchEnable":true,"files":["cloud://xxxx.4321-xxxx-0000000000/path-to-file"]}'
+```
+
+```sh
+curl 'http://127.0.0.1:3000/v1/aibot/bots/{your-botId}/send-message' \
+  -H 'Accept: text/event-stream' \
+  -H 'Content-Type: application/json' \
+  --data-raw '{"msg":"介绍一下函数型云托管？","searchEnable":false}'
+```
+
+```sh
+curl 'http://127.0.0.1:3000/v1/aibot/bots/{your-botId}/send-message' \
+  -H 'Accept: text/event-stream' \
+  -H 'Content-Type: application/json' \
+  --data-raw '{"msg":"总结下最近 30 天的用户访问情况？","searchEnable":false}'
 ```
 
 ### Agent 功能说明
@@ -157,7 +199,7 @@ curl 'http://127.0.0.1:3000/v1/aibot/bots/{your-botId}/send-message' \
 searchFileEnable: true
 ```
 
-文件 url 获取方式
+文件url 获取方式
 ![文件ID获取方式](https://qcloudimg.tencent-cloud.cn/raw/24941b6c489b8a0a76c90f021241ca1d.png)
 
 请求
@@ -199,10 +241,10 @@ curl 'http://127.0.0.1:3000/v1/aibot/bots/{your-botId}/send-message' \
 
 ```yaml
 databaseModel:
-  - 'lcap-data-4xxxx'
+  - "lcap-data-4xxxx"
 ```
 
-数据库 ID 配置获取方式
+数据库ID配置获取方式
 ![数据库ID配置获取方式](https://qcloudimg.tencent-cloud.cn/raw/276ca69d15306ae43c41f762a1aebf01.png)
 
 请求
@@ -245,10 +287,10 @@ curl 'http://127.0.0.1:3000/v1/aibot/bots/{your-botId}/send-message' \
 
 ```yaml
 knowledgeBase:
-  - '知识库ID'
+  - "知识库ID"
 ```
 
-知识库 ID 配置获取方式
+知识库ID配置获取方式
 ![知识库ID配置获取方式](https://qcloudimg.tencent-cloud.cn/raw/d5076c193baa72b31f67f58d86df4bd3.png)
 
 请求
@@ -284,7 +326,7 @@ curl 'http://127.0.0.1:3000/v1/aibot/bots/{your-botId}/send-message' \
 }
 ```
 
-#### MCP 服务调用
+#### MCP服务调用
 
 配置字段
 
@@ -296,7 +338,7 @@ mcpServerList:
     name: yuanqi-tool-6c7hvi
 ```
 
-创建 MCP 服务时，需要添加环境变量
+创建MCP服务时，需要添加环境变量
 
 ```txt
 SKIP_VERIFY_ACCESS: true
@@ -348,3 +390,26 @@ curl 'http://127.0.0.1:3000/v1/aibot/bots/{your-botId}/send-message' \
 }
 
 ```
+
+#### 语音输入输出
+
+配置字段
+
+```yaml
+voiceSettings:
+## 是否开启
+  enable: false
+## 语音输入引擎模型类型
+  inputType: "16k_zh"  
+## 语音输出音色
+  outputType: 501007
+```
+
+  
+`inputType` 字段枚举可参考
+[语音输入引擎模型类型](https://cloud.tencent.com/document/product/1093/35646#2.-.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0) 中的 `EngSerViceType` 字段
+
+`outputType` 字段枚举可参考
+[语音输出音色类型](https://cloud.tencent.com/document/product/1073/92668) 
+
+
