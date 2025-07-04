@@ -1,37 +1,39 @@
-import { ChatHistoryItem } from '@cloudbase/aiagent-framework';
+import { ChatHistoryItem } from '@cloudbase/aiagent-framework'
 
-import { BotContext } from './bot_context';
-import { BOT_ROLE_USER } from './constant';
-import { LLMCommunicator } from './llm';
+import { BotContext } from './bot_context'
+import { BOT_ROLE_USER } from './constant'
+import { ChatCompletionMessage, LLMCommunicator } from './llm'
 
 export class RecommendQuestionsService {
-  botContext: BotContext<any>;
+  botContext: BotContext
 
-  constructor(botContext: BotContext<any>) {
-    this.botContext = botContext;
+  constructor (botContext: BotContext) {
+    this.botContext = botContext
   }
 
   /**
    * 推荐问题的提示词
    */
-  private async genRecommendQuestionMessages({
+  private async genRecommendQuestionMessages ({
     historyChatList = [],
-    content = '',
+    content = ''
   }: {
     historyChatList?: ChatHistoryItem[];
     content?: string;
-  }): Promise<any[]> {
-    const questionList = JSON.parse(this.botContext.info?.initQuestions ?? '[]');
+  }): Promise<ChatCompletionMessage[]> {
+    const questionList = JSON.parse(
+      this.botContext.info?.initQuestions ?? '[]'
+    )
 
-    let question = '请问有什么需要帮助的嘛?';
+    let question = '请问有什么需要帮助的嘛?'
     if (questionList?.length !== 0) {
-      question = questionList[0];
+      question = questionList[0]
     }
 
     historyChatList.push({
       role: BOT_ROLE_USER,
-      content: content,
-    });
+      content: content
+    })
 
     const messages = [
       {
@@ -42,10 +44,10 @@ export class RecommendQuestionsService {
         [HISTORY]
         ${historyChatList
           ?.filter((item) => {
-            return item.role === BOT_ROLE_USER;
+            return item.role === BOT_ROLE_USER
           })
           .map((item) => {
-            return item.content;
+            return item.content
           })
           .join('\n')}
         [END HISTORY]
@@ -62,27 +64,27 @@ export class RecommendQuestionsService {
         ${question}
         
         问题的分隔用换行符,特别注意问题中不能出现换行符,否则会出现错误
-        `,
-      },
-    ];
-    return messages;
+        `
+      }
+    ]
+    return messages as ChatCompletionMessage[]
   }
 
-  async chat(params: any) {
+  async chat (params: { msg?: string; history?: Array<ChatHistoryItem> }) {
     const messages = await this.genRecommendQuestionMessages({
       historyChatList: params.history,
-      content: params.msg,
-    });
+      content: params.msg
+    })
 
     const agent = new LLMCommunicator(this.botContext, {
       ...this.botContext.config,
       searchEnable: false,
-      mcpEnable: false,
-    });
+      mcpEnable: false
+    })
 
     await agent.stream({
       messages,
-      recordId: 'recommend-questions',
-    });
+      recordId: 'recommend-questions'
+    })
   }
 }

@@ -5,5 +5,5 @@ interface Config {
 
 export default {
   envId: process.env.TCB_ENV_ID,
-  accessToken: process.env.TCB_ACCESSTOKEN,
-} as Config;
+  accessToken: process.env.TCB_ACCESSTOKEN
+} as Config

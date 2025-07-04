@@ -1,17 +1,17 @@
-import * as crypto from 'crypto';
+import * as crypto from 'crypto'
 
-export function genRandomStr(length: number): string {
+export function genRandomStr (length: number): string {
   return crypto
     .randomBytes(Math.ceil(length / 2))
     .toString('hex')
-    .slice(0, length);
+    .slice(0, length)
 }
 
-export function safeJsonParse(jsonString: string, defaultValue = null) {
+export function safeJsonParse (jsonString: string, defaultValue = null) {
   try {
-    return JSON.parse(jsonString);
+    return JSON.parse(jsonString)
   } catch (error) {
-    console.log('safeJsonParse error', error);
-    return defaultValue;
+    console.log('safeJsonParse error', error)
+    return defaultValue
   }
 }

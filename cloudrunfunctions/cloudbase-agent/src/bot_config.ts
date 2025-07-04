@@ -1,8 +1,8 @@
-import * as fs from 'fs';
-import * as yaml from 'js-yaml';
-import * as path from 'path';
+import * as fs from 'fs'
+import * as yaml from 'js-yaml'
+import * as path from 'path'
 
-import { McpServer } from './mcp';
+import { McpServer } from './mcp'
 
 export interface IBotConfig {
   name: string;
@@ -17,40 +17,48 @@ export interface IBotConfig {
   isNeedRecommend: boolean;
   searchNetworkEnable: boolean;
   searchFileEnable: boolean;
-  knowledgeBase: any[];
-  databaseModel: any[];
+  knowledgeBase: string[];
+  databaseModel: string[];
   initQuestions: string[];
   mcpServerList: McpServer[];
+  voiceSettings?: {
+    enable?: boolean;
+    inputType?: string;
+    outputType?: number;
+  };
 }
 
 export class BotConfig {
-  static instance: any;
-  data: IBotConfig;
+  static instance: BotConfig
+  data: IBotConfig
 
-  constructor() {
+  constructor () {
     if (BotConfig.instance) {
-      return BotConfig.instance;
+      return BotConfig.instance
     }
-    BotConfig.instance = this;
+    BotConfig.instance = this
 
     // 读取配置文件，并解析到data中
     try {
-      const yamlData = fs.readFileSync(path.join(__dirname, '..', 'bot-config.yaml'), 'utf8');
-      this.data = yaml.load(yamlData) as IBotConfig;
+      const yamlData = fs.readFileSync(
+        path.join(__dirname, '..', 'bot-config.yaml'),
+        'utf8'
+      )
+      this.data = yaml.load(yamlData) as IBotConfig
 
-      console.log('BotConfig loaded:', this.data);
+      console.log('BotConfig loaded:', this.data)
     } catch (err) {
-      console.error('Error reading or parsing file:', err);
+      console.error('Error reading or parsing file:', err)
     }
   }
 
-  getData(): IBotConfig {
-    return this.data;
+  getData (): IBotConfig {
+    return this.data
   }
 
-  setData(key, value) {
-    this.data[key] = value;
+  setData (key, value) {
+    this.data[key] = value
   }
 }
 
-export const botConfig: IBotConfig = new BotConfig().getData();
+export const botConfig: IBotConfig = new BotConfig().getData()

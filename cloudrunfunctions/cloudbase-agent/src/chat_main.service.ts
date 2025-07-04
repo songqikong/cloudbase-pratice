@@ -1,11 +1,16 @@
-import { ChatHistoryItem } from '@cloudbase/aiagent-framework';
+import { ChatHistoryItem } from '@cloudbase/aiagent-framework'
 
-import { BotContext } from './bot_context';
-import { ChatContextService } from './chat_context.service';
-import { ChatHistoryEntity, ChatHistoryService } from './chat_history.service';
-import { BOT_ROLE_ASSISTANT, BOT_ROLE_USER, BOT_TYPE_TEXT, TRIGGER_SRC_TCB } from './constant';
-import { LLMCommunicator } from './llm';
-import { getEnvId, getFileInfo } from './tcb';
+import { BotContext } from './bot_context'
+import { ChatContextService } from './chat_context.service'
+import { ChatHistoryEntity, ChatHistoryService } from './chat_history.service'
+import {
+  BOT_ROLE_ASSISTANT,
+  BOT_ROLE_USER,
+  BOT_TYPE_TEXT,
+  TRIGGER_SRC_TCB
+} from './constant'
+import { LLMCommunicator } from './llm'
+import { getEnvId, getFileInfo } from './tcb'
 
 export interface ChatOptions {
   botId: string;
@@ -16,39 +21,41 @@ export interface ChatOptions {
 }
 
 export class MainChatService {
-  botContext: BotContext<any>;
-  chatContextService: ChatContextService;
-  chatHistoryService: ChatHistoryService;
+  botContext: BotContext
+  chatContextService: ChatContextService
+  chatHistoryService: ChatHistoryService
 
-  constructor(botContext?: BotContext<any>) {
-    this.botContext = botContext;
-    this.chatContextService = new ChatContextService(botContext);
-    this.chatHistoryService = new ChatHistoryService(botContext);
+  constructor (botContext?: BotContext) {
+    this.botContext = botContext
+    this.chatContextService = new ChatContextService(botContext)
+    this.chatHistoryService = new ChatHistoryService(botContext)
   }
 
-  async beforeStream({
+  async beforeStream ({
     msg,
-    files,
+    files
   }: {
     msg: string;
     files: string[];
   }): Promise<{ replyRecordId: string }> {
     try {
       const userId =
-        this.botContext.context?.extendedContext?.userId || getEnvId(this.botContext.context);
+        this.botContext.context?.extendedContext?.userId ||
+        getEnvId(this.botContext.context)
       const baseMsgData = {
         sender: userId,
         type: this.botContext.info?.type ?? BOT_TYPE_TEXT,
         triggerSrc: TRIGGER_SRC_TCB,
         botId: this.botContext.info.botId,
-        recommendQuestions: [] as any,
+        recommendQuestions: [],
         asyncReply: '',
-        image: '',
-      };
-      const replyRecordId = await this.chatHistoryService.genRecordId();
+        image: ''
+      }
+      const replyRecordId = await this.chatHistoryService.genRecordId()
 
-      const originFileInfos = await getFileInfo(this.botContext.context, files);
-      const originMsg = { fileInfos: originFileInfos };
+      const originFileInfos = await getFileInfo(this.botContext.bot.tcb, files)
+
+      const originMsg = { fileInfos: originFileInfos }
       // 统一接收消息体
       const msgData: ChatHistoryEntity = {
         ...new ChatHistoryEntity(),
@@ -57,8 +64,8 @@ export class MainChatService {
         role: BOT_ROLE_USER,
         content: msg,
         originMsg: JSON.stringify(originMsg),
-        reply: replyRecordId,
-      };
+        reply: replyRecordId
+      }
 
       // 统一的回复消息体
       const replyMsgData: ChatHistoryEntity = {
@@ -69,70 +76,71 @@ export class MainChatService {
         content: '',
         originMsg: JSON.stringify({}),
         reply: replyRecordId,
-        needAsyncReply: false,
-      };
+        needAsyncReply: false
+      }
 
       // 添加到数据库
       await this.chatHistoryService.createChatHistory({
-        chatHistoryEntity: msgData,
-      });
+        chatHistoryEntity: msgData
+      })
 
       await this.chatHistoryService.createChatHistory({
-        chatHistoryEntity: replyMsgData,
-      });
+        chatHistoryEntity: replyMsgData
+      })
 
-      return { replyRecordId };
+      return { replyRecordId }
     } catch (error) {
-      console.log('beforeStream err:', error);
+      console.log('beforeStream err:', error)
     }
   }
 
-  async afterStream({ error, needSave, callMsg, chunks, recordId = '' }) {
+  async afterStream ({ error, needSave, callMsg, chunks, recordId = '' }) {
     if (error) {
-      console.log('请求大模型错误:', error);
+      console.log('请求大模型错误:', error)
     }
     if (needSave && recordId !== '') {
-      const newChatEntity = new ChatHistoryEntity();
-      newChatEntity.originMsg = JSON.stringify({ aiResHistory: callMsg });
-      newChatEntity.content = chunks;
+      const newChatEntity = new ChatHistoryEntity()
+      newChatEntity.originMsg = JSON.stringify({ aiResHistory: callMsg })
+      newChatEntity.content = chunks
       await this.chatHistoryService.updateChatHistoryByRecordId({
         recordId: recordId,
-        chatHistoryEntity: newChatEntity,
-      });
+        chatHistoryEntity: newChatEntity
+      })
     }
   }
 
-  async chat(options: ChatOptions) {
+  async chat (options: ChatOptions) {
     // 根据系统配置及请求参数构造对话上下文
     const { messages } = await this.chatContextService.prepareMessages({
       msg: options.msg,
       files: options.files,
       history: options.history,
-      searchEnable: options.searchEnable && this.botContext.info.searchNetworkEnable,
-      triggerSrc: TRIGGER_SRC_TCB,
-    });
+      searchEnable:
+        options.searchEnable && this.botContext.info.searchNetworkEnable,
+      triggerSrc: TRIGGER_SRC_TCB
+    })
     const { replyRecordId } = await this.beforeStream({
       msg: options.msg,
-      files: options.files,
-    });
+      files: options.files
+    })
 
     const llmCommunicator = new LLMCommunicator(this.botContext, {
       ...this.botContext.config,
-      mcpEnable: true,
-    });
+      mcpEnable: true
+    })
 
-    console.log('message: ', messages);
+    console.log('messages:', messages)
 
     // 发起流式对话
     const result = await llmCommunicator.stream({
       messages,
-      recordId: replyRecordId,
-    });
+      recordId: replyRecordId
+    })
 
     await this.afterStream({
       needSave: true,
       recordId: replyRecordId,
-      ...result,
-    });
+      ...result
+    })
   }
 }
