@@ -105,8 +105,7 @@ export class MyBot extends BotCore implements IBot {
         searchFileEnable: botConfig.searchFileEnable,
         mcpServerList: botConfig.mcpServerList,
         voiceSettings: botConfig.voiceSettings,
-        // 云函数中使用的是 UTC 时间戳，转换为北京时间戳
-        updateTime: Math.floor(stats.mtime.getTime() / 1000) + 8 * 60 * 60
+        updateTime: Math.floor(stats.mtime.getTime() / 1000)
       }
       return botInfo
     } catch (error) {
