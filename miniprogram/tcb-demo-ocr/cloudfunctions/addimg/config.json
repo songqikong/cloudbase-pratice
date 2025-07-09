@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "openapi": [
-      "ocr.bankcard",
-      "ocr.printedText",
-      "ocr.idcard"
-    ]
-  }
-}

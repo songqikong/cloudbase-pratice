@@ -1,1 +1,0 @@
-export const SPU_SELLING_STATUS = 'ENABLED';

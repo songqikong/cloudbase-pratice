@@ -1,7 +1,0 @@
-page{
-  background-color: #f3302d;
-  padding-top: 15px;
-}
-button::after{
-  border: none;
-}

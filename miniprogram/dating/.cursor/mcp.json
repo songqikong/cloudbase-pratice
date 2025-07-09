@@ -1,7 +1,0 @@
-{
-    "mcpServers": {
-        "cloudbase": {
-            "command": "cloudbase-mcp"
-        }
-    }
-}

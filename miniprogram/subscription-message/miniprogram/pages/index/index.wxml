@@ -1,4 +1,0 @@
-<view class="container">
-  <textarea class="textinput" bindinput="textin"></textarea>
-  <button class="submitbtn" bindtap="onSubscribe">发送订阅消息</button>
-</view>

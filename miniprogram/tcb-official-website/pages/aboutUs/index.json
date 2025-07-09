@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "version-info":"../../components/versionInfo/index"
-  },
-  "navigationStyle":"custom"
-}
